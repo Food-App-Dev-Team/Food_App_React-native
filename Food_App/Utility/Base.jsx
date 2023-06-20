@@ -1,19 +1,28 @@
-import React from 'react';
+import * as React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Account from "../Pages/Account.jsx"
+import Explore from "../Pages/Explore.jsx"
+import Friends from "../Pages/Friends.jsx"
+import Map_Page from "../Pages/Map.jsx"
+import Post from "../Pages/Post.jsx"
+import { NavigationContainer } from '@react-navigation/native';
+
 const Tab = createBottomTabNavigator();
-import Account from "../Pages/Account"
-import Explore from "../Pages/Explore"
-import Friends from "../Pages/Friends"
-import Map from "../Pages/Map"
-import Post from "../Pages/Post"
 
 function Base() {
-    <Tab.Navigator>
-      <Tab.Screen name="Account" component={Account} />
-      <Tab.Screen name="Explore" component={Explore} />
-      <Tab.Screen name="Friends" component={Friends} />
-      <Tab.Screen name="Map" component={Map} />
-      <Tab.Screen name="Post" component={Post} />
-    </Tab.Navigator>
+    return (
+        <NavigationContainer>
+            <Tab.Navigator>
+                <Tab.Screen name="Account" component={Account} />
+                <Tab.Screen name="Explore" component={Explore} />
+                <Tab.Screen name="Friends" component={Friends} />
+                <Tab.Screen name="Map" component={Map_Page} />
+                <Tab.Screen name="Post" component={Post} />
+            </Tab.Navigator>
+        </NavigationContainer>
+    )
+    
 }
+
+export default Base
