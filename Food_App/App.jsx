@@ -25,19 +25,11 @@ import {
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const App = () => {
-  return (
-    <View style={styles.container}>
-      <Base />
-    </View>
-  );
-}
-
 import { NavigationContainer } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-function Base() {
+function App() {
     return (
         <NavigationContainer>
             <Tab.Navigator>
@@ -65,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Base
+export default App
