@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import Account from "./Pages/Account.jsx"
 import Explore from "./Pages/Explore.jsx"
@@ -30,6 +30,7 @@ import { NavigationContainer } from '@react-navigation/native';
 const Tab = createBottomTabNavigator();
 
 function App() {
+
     return (
         <NavigationContainer>
             <Tab.Navigator>

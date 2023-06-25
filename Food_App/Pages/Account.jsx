@@ -32,7 +32,18 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       fontSize: 16,
       fontWeight: 'bold',
-    }
+    },
+    item: {
+      backgroundColor: '#007bff',
+      padding: 10,
+      margin: 5,
+      borderRadius: 5,
+    }, logout: {
+        backgroundColor: '#ff0000',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+      }
 });
 
 
@@ -40,6 +51,7 @@ const styles = StyleSheet.create({
 function Account() {
     const test_username = "Bruce"
     const test_userpassword = "06252023"
+    const recentlyView = ["Bambo Gardan", "Panda House", "Korean BBQ"]
 
 
     function Authenticate(userpassword, password) {
@@ -50,10 +62,21 @@ function Account() {
 
     }
 
+    function checkout(item){
+        
+    }
+
     return (
         <View style = {styles.container}>
-            <Text style = {styles.text}></Text> 
-            <TouchableOpacity style={styles.button} onPress={Logout}>
+            <Text style = {styles.text}>{test_username}</Text> 
+
+            {recentlyView.map((item, index) => (
+                <TouchableOpacity key = {index} style = {styles.item} onPress= {() => checkout({item})}>
+                    <Text style={styles.itemText}> {item}</Text>
+                </TouchableOpacity> 
+            ))}
+            
+            <TouchableOpacity style={styles.logout} onPress={Logout}>
                 <Text style={styles.buttonText}>Log out</Text>
             </TouchableOpacity>
 
