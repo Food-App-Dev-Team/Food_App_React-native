@@ -43,6 +43,20 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 5,
+        position: 'relative',
+        marginTop: 200
+      }, login: {
+        position: 'relative',
+        backgroundColor: '#00A400',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius:5
+      }, username: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#333333',
+        position: 'relative',
+        padding : 40
       }
 });
 
@@ -72,30 +86,44 @@ function Account() {
         setLogin(true)
     }
 
-    
+    function changePassword(){
 
-    
+    }
 
     return (
         <View style = {styles.container}>
-            {!login ? <View><TouchableOpacity style={styles.logout} onPress={Login}>
-                <Text style={styles.buttonText}>Log in</Text>
-            </TouchableOpacity></View> : <View></View>}
-            
+            {!login ? 
+            <View>
+                <TouchableOpacity style={styles.login} onPress={Login}>
+                    <Text style={styles.buttonText}>Log in</Text>
+                </TouchableOpacity>
+            </View> : <View></View>}
+        
+            {login ? 
+            <View>
+                <Text style = {styles.username}>{test_username}</Text> 
 
-            <Text style = {styles.text}>{test_username}</Text> 
+                <Text style = {styles.text}>Recently Viewed: </Text>
+                {recentlyView.map((item, index) => (
+                    <TouchableOpacity key = {index} style = {styles.item} onPress= {() => checkout({item})}>
+                        <Text style={styles.itemText}> {item}</Text>
+                    </TouchableOpacity> 
+                ))}
 
-            {recentlyView.map((item, index) => (
-                <TouchableOpacity key = {index} style = {styles.item} onPress= {() => checkout({item})}>
-                    <Text style={styles.itemText}> {item}</Text>
-                </TouchableOpacity> 
-            ))}
+          
+                <View>
+                    <TouchableOpacity style={styles.button} onPress={changePassword}>
+                        <Text style={styles.buttonText}>Change your password</Text>
+                    </TouchableOpacity>
+                </View>
             
-            {login ? <View><TouchableOpacity style={styles.logout} onPress={Logout}>
-                <Text style={styles.buttonText}>Log out</Text>
-            </TouchableOpacity></View> : <View></View>}
+                <View>
+                    <TouchableOpacity style={styles.logout} onPress={Logout}>
+                        <Text style={styles.buttonText}>Log out</Text>
+                    </TouchableOpacity>
+                </View> 
+            </View> : <View></View>}
             
-
         </View>
 
         
