@@ -1,15 +1,10 @@
 import React, { createContext, useState } from 'react';
+import Account from "./Pages/Account"
+import Explore from "./Pages/Explore"
+import Post from "./Pages/Post"
+// Create the UserContex
 
-// Create the UserContext
-export const UserContext = createContext();
 
-// Create a UserContextProvider component
-export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+const UserContext = createContext();
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
+export default UserContext

@@ -27,11 +27,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { NavigationContainer } from '@react-navigation/native';
 
+import UserContextProvider from "./contextProvider.js"
+
 const Tab = createBottomTabNavigator();
 
 function App() {
 
     return (
+       <UserContextProvider>
         <NavigationContainer>
             <Tab.Navigator>
                 <Tab.Screen name="Account" component={Account} />
@@ -41,6 +44,7 @@ function App() {
                 <Tab.Screen name="Post" component={Post} />
             </Tab.Navigator>
         </NavigationContainer>
+       </UserContextProvider>
     )
     
 }

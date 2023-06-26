@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -46,28 +46,43 @@ const styles = StyleSheet.create({
       }
 });
 
+import UserContext from "../context.js"
+
 
 
 function Account() {
     const test_username = "Bruce"
     const test_userpassword = "06252023"
     const recentlyView = ["Bambo Gardan", "Panda House", "Korean BBQ"]
-
+    const { login, setLogin } = useContext(UserContext);
 
     function Authenticate(userpassword, password) {
         return userpassword === password
     }
 
     function Logout() {
-
+        setLogin(false)
     }
 
     function checkout(item){
-        
+
     }
+
+    function Login() {
+        setLogin(true)
+    }
+
+    
+
+    
 
     return (
         <View style = {styles.container}>
+            {!login ? <View><TouchableOpacity style={styles.logout} onPress={Login}>
+                <Text style={styles.buttonText}>Log in</Text>
+            </TouchableOpacity></View> : <View></View>}
+            
+
             <Text style = {styles.text}>{test_username}</Text> 
 
             {recentlyView.map((item, index) => (
@@ -76,9 +91,10 @@ function Account() {
                 </TouchableOpacity> 
             ))}
             
-            <TouchableOpacity style={styles.logout} onPress={Logout}>
+            {login ? <View><TouchableOpacity style={styles.logout} onPress={Logout}>
                 <Text style={styles.buttonText}>Log out</Text>
-            </TouchableOpacity>
+            </TouchableOpacity></View> : <View></View>}
+            
 
         </View>
 
