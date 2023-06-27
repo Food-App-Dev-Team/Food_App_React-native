@@ -10,61 +10,10 @@ import {
     TouchableOpacity
   } from 'react-native';
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f5f5f5',
-    },
-    text: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: '#333333',
-    },
-    button: {
-      backgroundColor: '#4287f5',
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 5,
-    },
-    buttonText: {
-      color: '#ffffff',
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
-    item: {
-      backgroundColor: '#007bff',
-      padding: 10,
-      margin: 5,
-      borderRadius: 5,
-    }, logout: {
-        backgroundColor: '#ff0000',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
-        position: 'relative',
-        marginTop: 200
-      }, login: {
-        position: 'relative',
-        backgroundColor: '#00A400',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius:5
-      }, username: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#333333',
-        position: 'relative',
-        padding : 40
-      }
-});
-
 import UserContext from "../context.js"
+import Register from "./Register.jsx"
 
-
-
-function Account() {
+function Account({navigation}) {
     const test_username = "Bruce"
     const test_userpassword = "06252023"
     const recentlyView = ["Bambo Gardan", "Panda House", "Korean BBQ"]
@@ -89,19 +38,21 @@ function Account() {
     function changePassword(){
 
     }
+
     function Register() {
-      const url = "http://localhost:3000/insertUser/Ivy/abc123/01022001/gzy@gmail"
-      fetch(url, {
-        method: 'POST',  
-      })
-        .then(response => response.json())
-        .then(result => {
-          console.log(`Result is : ${result}`);
-        })
-        .catch(error => {
-          // Handle any errors that occur during the request
-          console.error(error);
-        });
+      navigation.navigate('Register')
+      // const url = "http://localhost:3000/insertUser/Ivy/abc123/01022001/gzy@gmail"
+      // fetch(url, {
+      //   method: 'POST',  
+      // })
+      //   .then(response => response.json())
+      //   .then(result => {
+      //     console.log(`Result is : ${result}`);
+      //   })
+      //   .catch(error => {
+      //     // Handle any errors that occur during the request
+      //     console.error(error);
+      //   });
     }
 
     return (
@@ -148,5 +99,55 @@ function Account() {
         
     )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333333',
+  },
+  button: {
+    backgroundColor: '#4287f5',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  item: {
+    backgroundColor: '#007bff',
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+  }, logout: {
+      backgroundColor: '#ff0000',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 5,
+      position: 'relative',
+      marginTop: 200
+    }, login: {
+      position: 'relative',
+      backgroundColor: '#00A400',
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius:5
+    }, username: {
+      fontSize: 30,
+      fontWeight: 'bold',
+      color: '#333333',
+      position: 'relative',
+      padding : 40
+    }
+});
 
 export default Account
