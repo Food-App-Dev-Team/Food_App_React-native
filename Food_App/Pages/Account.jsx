@@ -89,14 +89,33 @@ function Account() {
     function changePassword(){
 
     }
+    function Register() {
+      const url = "http://localhost:3000/insertUser/Ivy/abc123/01022001/gzy@gmail"
+      fetch(url, {
+        method: 'POST',  
+      })
+        .then(response => response.json())
+        .then(result => {
+          console.log(`Result is : ${result}`);
+        })
+        .catch(error => {
+          // Handle any errors that occur during the request
+          console.error(error);
+        });
+    }
 
     return (
         <View style = {styles.container}>
             {!login ? 
             <View>
+                
                 <TouchableOpacity style={styles.login} onPress={Login}>
                     <Text style={styles.buttonText}>Log in</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.login} onPress={Register}>
+                    <Text style={styles.buttonText}>Register</Text>
+                </TouchableOpacity>
+
             </View> : <View></View>}
         
             {login ? 
