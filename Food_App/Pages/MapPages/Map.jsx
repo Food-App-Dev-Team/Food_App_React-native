@@ -13,6 +13,7 @@ import {
     Button,
     TextInput
   } from 'react-native';
+import ListofRestaurant from "./List.jsx"
 
 function Map() {
     const [radius, setRadius] = useState(3000)
@@ -26,12 +27,12 @@ function Map() {
       })
     const [search, setSearch] = useState("")
     const [modalVisible, setModalVisible] = useState(false);
-    
+    const API_key = "AIzaSyBqCOGHAydLkq2oOkMhI1mLay8VX0XwVC4"
 
     const [markers, setMarkers] = useState(<View></View>)
+    const [curList, setCurList] = useState([{name: "abc", rating : 3.4}])
 
     
-
     const [renderMap, setRenderMap] = useState(
     <MapView style = {styles.map}
       region = {curRegion}>
@@ -81,7 +82,7 @@ function Map() {
       const searchString = encodeURIComponent(search)
       //console.log(searchString)
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lon}&radius=${radius}&type=restaurant&keyword=${searchString}&key=${API_key}`
-     
+      //const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.143%2C-86.796&radius=3000&type=restaurant&keyword=Chinese%20food&key=AIzaSyBqCOGHAydLkq2oOkMhI1mLay8VX0XwVC4"
       fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -93,8 +94,19 @@ function Map() {
             title={`Marker ${marker.id}`}
           />
         ));
-        console.log(newMarkers)
+        
         setMarkers(newMarkers)
+        
+        const list_restuarant = result.map((info) => ({
+          location : info.geometry.location,
+          name : info.name,
+          pricelevel : info.pricelevel,
+          rating : info.rating
+        }))
+        setCurList(
+          list_restuarant
+        )     
+        console.log(curList)  
       })
       .catch(error => {
         console.error('Error:', error);
@@ -140,6 +152,7 @@ function Map() {
                 title="Marker 2"
               />
             </MapView>
+            <ListofRestaurant list = {curList}/>
             
         </View>
     )

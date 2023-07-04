@@ -4,9 +4,10 @@ import type {PropsWithChildren} from 'react';
 import Account from "./Pages/Account.jsx"
 import Explore from "./Pages/Explore.jsx"
 import Friends from "./Pages/Friends.jsx"
-import Map_Page from "./Pages/Map.jsx"
+import Map_Page from "./Pages/MapPages/Map.jsx"
 import Post from "./Pages/Post.jsx"
 import Register from './Pages/Register'
+import ListofRestaurant from './Pages/MapPages/List.jsx'
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaView,
