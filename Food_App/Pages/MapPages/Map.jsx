@@ -1,6 +1,7 @@
 import React , {useState, useEffect} from 'react';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps';
 import {
+    Image,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -11,9 +12,17 @@ import {
     TouchableOpacity,
     Modal,
     Button,
-    TextInput
+    TextInput,
+    Animated
   } from 'react-native';
-import ListofRestaurant from "./List.jsx"
+import ListOfRestaurant from "./List.jsx"
+import { Dimensions } from 'react-native';
+import black_marker from '../../img/black_marker.png'
+import CustomCallout from './Callout.jsx'
+
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
+
 
 function Map() {
     const [radius, setRadius] = useState(3000)
@@ -27,17 +36,20 @@ function Map() {
       })
     const [search, setSearch] = useState("")
     const [modalVisible, setModalVisible] = useState(false);
-    const API_key = "AIzaSyBqCOGHAydLkq2oOkMhI1mLay8VX0XwVC4"
+    const API_key = 
 
     const [markers, setMarkers] = useState(<View></View>)
     const [curList, setCurList] = useState([{name: "abc", rating : 3.4}])
-
+    
     
     const [renderMap, setRenderMap] = useState(
     <MapView style = {styles.map}
-      region = {curRegion}>
+      region = {curRegion}
+     >
       </MapView>
     )
+
+    
 
     const openModal = () => {
       setModalVisible(true);
@@ -76,23 +88,40 @@ function Map() {
     
     }, [lat, lon])
   
+
+    const handleMarkerPress = (marker) => {
+      // console.log(marker)
+    }
     
 
     function handleSearch(){
       const searchString = encodeURIComponent(search)
-      //console.log(searchString)
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lon}&radius=${radius}&type=restaurant&keyword=${searchString}&key=${API_key}`
-      //const url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.143%2C-86.796&radius=3000&type=restaurant&keyword=Chinese%20food&key=AIzaSyBqCOGHAydLkq2oOkMhI1mLay8VX0XwVC4"
       fetch(url)
       .then(response => response.json())
       .then(data => {
         const result = data.results
-        const newMarkers = result.map((marker) => (
+        result.sort((a, b) => a.rating - b.rating)
+        const newMarkers = result.map((marker, index) => (
           <Marker
             key={marker.place_id}
             coordinate={{ latitude: marker.geometry.location.lat, longitude: marker.geometry.location.lng }}
-            title={`Marker ${marker.id}`}
-          />
+            title={index.toString()}
+            onPress={() => handleMarkerPress(index.toString())}
+          >
+            <Image
+              source={black_marker}
+              style={{ width:35, height: 35 }} // Adjust the width and height as desired
+              />
+            <CustomCallout 
+              style={styles.callout} 
+              name= {marker.name} 
+              rating={marker.rating}
+              picture={marker.photos}
+              coordinate={{ latitude: marker.geometry.location.lat, longitude: marker.geometry.location.lng }} >
+             
+            </CustomCallout>
+          </Marker>
         ));
         
         setMarkers(newMarkers)
@@ -105,8 +134,7 @@ function Map() {
         }))
         setCurList(
           list_restuarant
-        )     
-        console.log(curList)  
+        )      
       })
       .catch(error => {
         console.error('Error:', error);
@@ -114,10 +142,6 @@ function Map() {
       closeModal(); 
     }
 
-    
-    
-
-    
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={openModal}>
@@ -145,14 +169,12 @@ function Map() {
             <MapView
               style = {styles.map}
               region = {curRegion}
+             
             >
               {markers}
-              <Marker
-                coordinate={{ latitude: 36.143, longitude: -86.8 }}
-                title="Marker 2"
-              />
+             
             </MapView>
-            <ListofRestaurant list = {curList}/>
+           
             
         </View>
     )
@@ -179,8 +201,23 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       marginBottom: 10
     },map: {
-        flex : 1
+        height: 450,
+        flex : 1,
+        width: '100%'
     }, 
+    
+    theMap: {
+      // position: 'absolute',
+      // top: 0,
+      // left: 0,
+      // right: 0,
+      // overflow: 'hidden',
+      // height: 450,
+      // backgroundColor: '#f6f6f6'
+    },
+    callout:{
+
+    }
   
   });
 
