@@ -10,7 +10,12 @@ cd ../Food_App_Reactive/Food_App
 npx react-native start
 ```
 3. Run the application on the simulator
+
 Open a new terminal
+
+```
+cd ../Food_App_Reactive/Food_App
+```
 ```
 npx react-native run-ios
 ```
