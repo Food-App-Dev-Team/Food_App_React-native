@@ -7,12 +7,12 @@
 cd ../Food_App_Reactive/Food_App
 ```
 ```
-npm react-native start
+npx react-native start
 ```
 3. Run the application on the simulator
 Open a new terminal
 ```
-npm react-native run-ios
+npx react-native run-ios
 ```
 
 If starting the app for the first time or added new packages
