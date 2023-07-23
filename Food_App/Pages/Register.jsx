@@ -18,31 +18,58 @@ function Register({navigation}) {
     const [password, setPassword] = useState("")
     const [birthday, setBirthday] = useState("")
     const [email, setEmail] = useState("")
+    const [exist, setExist] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     function Register_user(){
         const url = `http://localhost:3000/insertUser/${username}/${password}/${birthday}/${email}`
-
         fetch(url, {
             method: 'POST',  
         })
         .then(response => response.json())
-        .then(result => {
-          console.log(`Result is : ${result.insertedId}`);
+        .then(data => {
+          console.log(data); 
+          if(data === "Username already exist"){
+            console.log("here")
+            setExist(true)
+            console.log(exist)
+          } else {
+            if(data.insertedID !== null){
+              setSuccess(true)
+            }
+            setExist(false)
+          }
         })
+        // .then(() => {
+        //   console.log(exist)
+        //   if(exist){
+        //     console.log(exist)
+        //   } else {
+        //     navigation.goBack();
+        //   }
+        //   })
         .catch(error => {
           console.error(error);
-        });
+        })
+        
+    }
 
-        navigation.goBack();
+    const handleTextChange = (text) => {
+      setUsername(text)
+      setExist(false)
+      setSuccess(false)
+      console.log("change")
     }
 
     return (
         <View>
+            {exist ? <Text style = {styles.alreadyExist}>The User Name You Input Already Exist</Text> : <Text></Text>}
+            {success && <Text>Successfully Registered</Text>}
             <TextInput
                 style={styles.input}
                 placeholder="Username"
                 value={username}
-                onChangeText={setUsername}
+                onChangeText={handleTextChange}
             />
             <TextInput
                 style={styles.input}
@@ -90,6 +117,10 @@ const styles = StyleSheet.create({
       paddingVertical: 10,
       paddingHorizontal: 20,
       borderRadius: 5,
+    }, 
+    alreadyExist: {
+      color: 'red',
+      fontSize: 16,
     }
   });
 

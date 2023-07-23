@@ -12,8 +12,9 @@ import {
 
 import UserContext from "../context.js"
 import Register from "./Register.jsx"
+import Login from "./Login.jsx"
 
-function Account({navigation}) {
+function Account({navigation, prop}) {
     const test_username = "Bruce"
     const test_userpassword = "06252023"
     const recentlyView = ["Bambo Gardan", "Panda House", "Korean BBQ"]
@@ -32,7 +33,9 @@ function Account({navigation}) {
     }
 
     function Login() {
-        setLogin(true)
+        // setLogin(true)
+
+      navigation.navigate("Login")
     }
 
     function changePassword(){
@@ -41,25 +44,13 @@ function Account({navigation}) {
 
     function Register() {
       navigation.navigate('Register')
-      // const url = "http://localhost:3000/insertUser/Ivy/abc123/01022001/gzy@gmail"
-      // fetch(url, {
-      //   method: 'POST',  
-      // })
-      //   .then(response => response.json())
-      //   .then(result => {
-      //     console.log(`Result is : ${result}`);
-      //   })
-      //   .catch(error => {
-      //     // Handle any errors that occur during the request
-      //     console.error(error);
-      //   });
+      
     }
 
     return (
         <View style = {styles.container}>
             {!login ? 
             <View>
-                
                 <TouchableOpacity style={styles.login} onPress={Login}>
                     <Text style={styles.buttonText}>Log in</Text>
                 </TouchableOpacity>

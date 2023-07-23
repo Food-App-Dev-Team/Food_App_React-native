@@ -36,7 +36,7 @@ function Map() {
       })
     const [search, setSearch] = useState("")
     const [modalVisible, setModalVisible] = useState(false);
-    const API_key = 
+    const API_key = ""
 
     const [markers, setMarkers] = useState(<View></View>)
     const [curList, setCurList] = useState([{name: "abc", rating : 3.4}])
@@ -100,6 +100,7 @@ function Map() {
       fetch(url)
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         const result = data.results
         result.sort((a, b) => a.rating - b.rating)
         const newMarkers = result.map((marker, index) => (

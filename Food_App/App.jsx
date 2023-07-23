@@ -8,6 +8,7 @@ import Map_Page from "./Pages/MapPages/Map.jsx"
 import Post from "./Pages/Post.jsx"
 import Register from './Pages/Register'
 import ListofRestaurant from './Pages/MapPages/List.jsx'
+import Login from './Pages/Login'
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaView,
@@ -60,6 +61,7 @@ function App() {
             </Tab.Navigator> */}
             <Stack.Screen name = "Back" component= {Tab_Navi} options={{ headerShown: false }}/>
             <Stack.Screen name="Register" component={Register}  />
+            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
        </UserContextProvider>
